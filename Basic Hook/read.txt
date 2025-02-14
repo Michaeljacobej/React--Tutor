@@ -1,0 +1,30 @@
+props:
+
+Props are arguments passed into React components.
+
+Hooks 
+allow function components to have access to state and other React features. Because of this, class components are generally no longer needed.
+
+useState :
+a Component Memory
+
+useEffect
+a React Hook that lets you [synchronize a component with an external system.](https://react.dev/learn/synchronizing-with-effects)
+`useEffect` runs on every render. That means that when the count changes, a render happens, which then triggers another effect.
+
+useCallback
+React Hook that lets you cache a function definition between re-renders. 
+One reason to use `useCallback` is to prevent a component from re-rendering unless its props have changed.
+
+useMemo
+a React Hook that lets you cache the result of a calculation between re-renders
+The React `useMemo` Hook returns a memoized value.
+
+useReducer
+a React Hook that lets you add a [reducer](https://react.dev/learn/extracting-state-logic-into-a-reducer) to your component.
+The `useReducer` Hook is similar to the `useState` Hook.
+It allows for custom state logic.
+
+useRef
+a React Hook that lets you reference a value that’s not needed for rendering.
+If we tried to count how many times our application renders using the `useState` Hook, we would be caught in an infinite loop since this Hook itself causes a re-render.
