@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ReactDOM from "react-dom/client";
 
-
+// 
 // useState
 function FavoriteColor() {
   const [color, setColor] = useState("red");
