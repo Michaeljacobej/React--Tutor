@@ -21,3 +21,67 @@ Reducers should be split up to make them easier to read
     - Reducers are usually written in "slice" files, organized into "feature" folders
     - Reducers can be combined together with the Redux combineReducers function
     - The key names given to combineReducers define the top-level state object keys
+
+
+Creating a Store
+Every Redux store has a single root reducer function. In the previous section, we created a root reducer function using combineReducers.
+That root reducer is currently defined in src/reducer.js in our example app. Let's import that root reducer and create our first store.
+
+
+Redux Store
+The Redux store brings together the state, actions, and reducers that make up your app. The store has several responsibilities:
+
+Holds the current application state inside
+Allows access to the current state via store.getState();
+Allows state to be updated via store.dispatch(action);
+Registers listener callbacks via store.subscribe(listener);
+Handles unregistering of listeners via the unsubscribe function returned by store.subscribe(listener).
+It's important to note that you'll only have a single store in a Redux application. When you want to split your data handling logic, 
+you'll use reducer composition and create multiple reducers that can be combined together, instead of creating separate stores.
+
+
+
+Middleware
+Enhancers are powerful because they can override or replace any of the store's methods: dispatch, getState, and subscribe.
+
+But, much of the time, we only need to customize how dispatch behaves. It would be nice if there was a way to add some customized behavior when dispatch runs.
+
+Redux uses a special kind of addon called middleware to let us customize the dispatch function.
+
+If you've ever used a library like Express or Koa, you might already be familiar with the idea of adding middleware to customize behavior. In these frameworks, 
+middleware is some code you can put between the framework receiving a request, and the framework generating a response.
+For example, Express or Koa middleware may add CORS headers, logging, compression, and more. The best feature of middleware is that it's composable in a chain.
+You can use multiple independent third-party middleware in a single project.
+
+Redux middleware solves different problems than Express or Koa middleware, but in a conceptually similar way. Redux middleware provides a third-party extension point between dispatching an action, 
+and the moment it reaches the reducer. People use Redux middleware for logging, crash reporting, talking to an asynchronous API, routing, and more.
+
+First, we'll look at how to add middleware to the store, then we'll show how you can write your own.
+
+
+Middleware Use Cases
+So, what can we do with middleware? Lots of things!
+
+A middleware can do anything it wants when it sees a dispatched action:
+
+Log something to the console
+Set timeouts
+Make asynchronous API calls
+Modify the action
+Pause the action or even stop it entirely
+
+
+Redux stores can be used with any UI layer
+    -UI code always subscribes to the store, gets the latest state, and redraws itself
+React-Redux is the official Redux UI bindings library for React
+    -React-Redux is installed as a separate react-redux package
+The useSelector hook lets React components read data from the store
+    -Selector functions take the entire store state as an argument, and return a value based on that state
+    -useSelector calls its selector function and returns the result from the selector
+    -useSelector subscribes to the store, and re-runs the selector each time an action is dispatched.
+    -Whenever the selector result changes, useSelector forces the component to re-render with the new data
+The useDispatch hook lets React components dispatch actions to the store
+    -useDispatch returns the actual store.dispatch function
+    -You can call dispatch(action) as needed inside your components
+The <Provider> component makes the store available to other React components
+    -Render <Provider store={store}> around your entire <App>
