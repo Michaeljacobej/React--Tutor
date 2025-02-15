@@ -64,11 +64,11 @@ So, what can we do with middleware? Lots of things!
 
 A middleware can do anything it wants when it sees a dispatched action:
 
-Log something to the console
-Set timeouts
-Make asynchronous API calls
-Modify the action
-Pause the action or even stop it entirely
+    -Log something to the console
+    -Set timeouts
+    -Make asynchronous API calls
+    -Modify the action
+    -Pause the action or even stop it entirely
 
 
 Redux stores can be used with any UI layer
@@ -86,3 +86,25 @@ The useDispatch hook lets React components dispatch actions to the store
 The <Provider> component makes the store available to other React components
     -Render <Provider store={store}> around your entire <App>
     
+Redux Middleware and Side Effects
+
+    -Logging a value to the console
+    -Saving a file
+    -Setting an async timer
+    -Making an HTTP request
+    -Modifying some state that exists outside of a function, or mutating arguments to a function
+    -Generating random numbers or unique random IDs (such as Math.random() or Date.now())
+
+Using the Redux Thunk Middleware
+As it turns out, Redux already has an official version of that "async function middleware",
+called the Redux "Thunk" middleware. The thunk middleware allows us to write functions that get dispatch and getState as arguments. 
+The thunk functions can have any async logic we want inside, and that logic can dispatch actions and read the store state as needed.
+
+Redux middleware were designed to enable writing logic that has side effects
+    -"Side effects" are code that changes state/behavior outside a function, like HTTP requests, modifying function arguments, or generating random values
+Middleware add an extra step to the standard Redux data flow
+    -Middleware can intercept other values passed to dispatch
+    -Middleware have access to dispatch and getState, so they can dispatch more actions as part of async logic
+The Redux "Thunk" middleware lets us pass functions to dispatch
+    -"Thunk" functions let us write async logic ahead of time, without knowing what Redux store is being used
+    -A Redux thunk function receives dispatch and getState as arguments, and can dispatch actions like "this data was received from an API response"
